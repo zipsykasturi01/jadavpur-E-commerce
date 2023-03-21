@@ -1,0 +1,94 @@
+package com.niit.Backend.DAOIMPL;
+
+import java.util.List;
+
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.niit.Backend.DAO.CartLinesDAO;
+import com.niit.Backend.modal.Cart;
+import com.niit.Backend.modal.CartLines;
+
+@Repository("cartLinesDAO")
+@Transactional
+public class CartLinesDAOIMPL  implements CartLinesDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Override
+	public boolean add(CartLines cartLine) {
+		try {
+			sessionFactory.getCurrentSession().persist(cartLine);
+			return true;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(CartLines cartLine) {
+		try {
+			sessionFactory.getCurrentSession().update(cartLine);
+			return true;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean remove(CartLines cartLine) {	
+		try {			
+			sessionFactory.getCurrentSession().delete(cartLine);
+			return true;
+		}catch(Exception ex) {
+			return false;
+		}		
+	}
+
+
+	@Override
+	public List<CartLines> list(int cartId) {
+		String query = "FROM CartLines WHERE cartId = :cartId";
+		return sessionFactory.getCurrentSession()
+								.createQuery(query, CartLines.class)
+									.setParameter("cartId", cartId)
+										.getResultList();		
+	}
+
+	@Override
+	public CartLines get(int id) {		
+		return sessionFactory.getCurrentSession().get(CartLines.class, Integer.valueOf(id));
+	}
+
+	@Override
+	public boolean updateCart(Cart cart) {
+		try {			
+			sessionFactory.getCurrentSession().update(cart);			
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<CartLines> listAvailable(int cartId) {
+		String query = "FROM CartLine WHERE cartId = :cartId AND available = :available";
+		return sessionFactory.getCurrentSession()
+								.createQuery(query, CartLines.class)
+									.setParameter("cartId", cartId)
+									.setParameter("available", true)
+										.getResultList();
+	}
+	
+	
+}
+
