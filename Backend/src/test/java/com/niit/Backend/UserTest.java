@@ -42,6 +42,7 @@ public class UserTest {
 		
 		assertEquals("Error inserting user" ,  true , userDAO.insert(user));
 	}
+	/*
 	
 	//@Test
 	public void testGetUser()
@@ -49,13 +50,7 @@ public class UserTest {
 		user = userDAO.getUser("rohan@gmail.com");
 		assertEquals("Error fetching user" , "Rohan" , user.getFirstName());
 	}
-	
-	//@Test
-	public void testSupplierList()
-	{
-			
-			assertEquals("Error fetching user" , 2 , userDAO.getSupplierList().size());
-	}
+	*/
 	
 	
 }

@@ -34,9 +34,10 @@ public class HibernateConfig {
 		dataSource.setUsername(DATABASE_USERNAME);
 		dataSource.setPassword(DATABASE_PASSWORD);
 
-		return (DataSource) dataSource;
+		return dataSource;
 
 	}
+
 
 	private Properties getHibernateProperties() {
 
@@ -51,10 +52,10 @@ public class HibernateConfig {
 		return properties;
 	}
 
-	@Bean
+	@Bean()
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 
-		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder((javax.sql.DataSource) dataSource);
+		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
 
 		builder.addProperties(getHibernateProperties());
 		builder.scanPackages("com.niit.Backend.modal");

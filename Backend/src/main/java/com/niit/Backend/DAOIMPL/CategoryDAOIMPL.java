@@ -74,7 +74,6 @@ public class CategoryDAOIMPL implements CategoryDAO
 						
 		return query.getResultList();
 	}
-
 }
 
 

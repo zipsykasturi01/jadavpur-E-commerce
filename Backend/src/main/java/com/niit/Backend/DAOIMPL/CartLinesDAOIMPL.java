@@ -81,14 +81,13 @@ public class CartLinesDAOIMPL  implements CartLinesDAO {
 
 	@Override
 	public List<CartLines> listAvailable(int cartId) {
-		String query = "FROM CartLine WHERE cartId = :cartId AND available = :available";
+		String query = "FROM CartLines WHERE cartId = :cartId AND available = :available";
 		return sessionFactory.getCurrentSession()
 								.createQuery(query, CartLines.class)
 									.setParameter("cartId", cartId)
 									.setParameter("available", true)
 										.getResultList();
 	}
-	
 	
 }
 
