@@ -34,4 +34,11 @@ public class JsonController {
 	public List<Product> getProductsByCategory(@PathVariable int id) {
 		return productDAO.listActiveProductsByCategory(id);
 	}
+	@RequestMapping("/top/purchased/products")
+	@ResponseBody
+	public List<Product> getTopPurchasedProduct() {
+		return productDAO.topPurchasedProduct();
+	}
+	
+	
 }

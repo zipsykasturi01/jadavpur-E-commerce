@@ -65,9 +65,34 @@ $(function()
 											+ '/product/view/single/'
 											+ data
 											+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>View Details</a> &#160;';
-											
+											if (userRole !== 'ADMIN') 
+											{
+												if (row.quantity < 1) 
+													{
+														str += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+													} 
+													else 
+													{
+
+														str += '<a href="'
+																+ window.contextRoot
+																+ '/cart/add/'
+																+ data
+																+ '/product" class="btn btn-success"><i class="fas fa-shopping-cart">Add To Cart</i></a>';
+													}
+											} 	
+											else 
+											{
+													str += '<a href="'
+															+ window.contextRoot
+															+ '/manage/'
+															+ data
+															+ '/product" class="btn btn-warning"><span class="glyphicon glyphicon-pencil">EDIT Product</span></a>';
+											}
 											return str;
 											}
+											
+											
 						}
 				]
 			
@@ -218,5 +243,30 @@ $(function()
 
 				});
 	}
+	
+	
+	
+
+	
+	$('button[name="refreshCart"]').click(function()
+			{
+		var cartLineId = $(this).attr('value');
+		
+		var countField = $('#count_' + cartLineId);
+		
+		var originalCount = countField.attr('value');
+		
+
+		var updatedCount = countField.val();
+		
+		if(updatedCount != originalCount) 
+		{	
+			
+				
+				var updateUrl = window.contextRoot + '/cart/' + cartLineId + '/update?count=' + updatedCount;
+				window.location.href = updateUrl;
+			
+		}
+		});
 
 });

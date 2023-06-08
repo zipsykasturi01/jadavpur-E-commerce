@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUpload {
-	private static final String ABS_PATH = "C:\\kasturi_E-commerce project\\Frontend\\src\\main\\webapp\\assets\\images";
+	private static final String ABS_PATH = "C:\\kasturi_E-commerce project\\Frontend\\src\\main\\webapp\\assets\\images\\";
 	private static String REAL_PATH = null;
 	
 	

@@ -64,10 +64,43 @@
 			</c:choose>
 			<hr />
 
-			<a href="#"
-				class="btn btn-success"> <span
-				class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
-			</a> </a> <a href="${contextRoot}/product/view/all/product" class="btn btn-primary">Back</a>
+			<security:authorize access="isAnonymous() or hasAuthority('USER')">
+
+				<c:choose>
+
+					<c:when test="${product.quantity < 1}">
+
+						<a href="javascript:void(0)" class="btn btn-success disabled"><strike>
+								<span class="glyphicon glyphicon-shopping-cart"></span> Add to
+								Cart
+						</strike></a>
+
+					</c:when>
+					<c:otherwise>
+
+						<a href="${contextRoot}/cart/add/${product.id}/product"
+							class="btn btn-success"> <span
+							class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+						</a>
+
+
+
+
+					</c:otherwise>
+
+				</c:choose>
+			</security:authorize>
+
+
+			<security:authorize access="hasAuthority('ADMIN')">
+				<a href="${contextRoot}/manage/${product.id}/product"
+					class="btn btn-success"> <span
+					class="glyphicon glyphicon-pencil"></span> Edit
+				</a>
+			</security:authorize>
+
+			<a href="${contextRoot}/product/view/all/product"
+				class="btn btn-primary">Back</a>
 
 		</div>
 

@@ -40,3 +40,14 @@
 </head>
 
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container">
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="nav navbar-nav ">
+				<li class="nav-item active"><a class="nav-link"
+					href="${contextRoot}/home">Home </a></li>
+				</ul>
+		</div>
+	</div>
+</nav>

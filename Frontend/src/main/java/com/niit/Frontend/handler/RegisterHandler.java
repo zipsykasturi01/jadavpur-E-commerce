@@ -14,59 +14,59 @@ import com.niit.Frontend.model.RegisterModel;
 public class RegisterHandler 
 {
 	
-		@Autowired
-		UserDAO userDAO;
-		
-		public RegisterModel init()
-		{
-			return new RegisterModel();
-		}
-		
-		public void addUser(RegisterModel registerModel, User user) {
-			registerModel.setUser(user);
-		}
+	@Autowired
+	UserDAO userDAO;
+	
+	public RegisterModel init()
+	{
+		return new RegisterModel();
+	}
+	
+	public void addUser(RegisterModel registerModel, User user) {
+		registerModel.setUser(user);
+	}
 
-		public void addBilling(RegisterModel registerModel, Address billing) {
-			registerModel.setBilling(billing);
+	public void addBilling(RegisterModel registerModel, Address billing) {
+		registerModel.setBilling(billing);
+	}
+	
+	public String saveAll(RegisterModel registerModel) 
+	{
+		User user = registerModel.getUser();
+		user.setEnabled(true);
+		
+		if (user.getRole().equals("USER")) {
+			Cart cart = new Cart();
+			cart.setUser(user);
+			user.setCart(cart);
 		}
 		
-		public String saveAll(RegisterModel registerModel) 
+		userDAO.insert(user);
+		
+		Address billing = registerModel.getBilling();
+		billing.setUserId(user.getId());
+		billing.setBilling(true);
+		
+		userDAO.insertAddress(billing);
+		
+		return "success";
+		
+	}
+	
+	public String validate(User user , MessageContext error)
+	{
+		if(!(user.getPassword().equals(user.getConfirmPassword())))
 		{
-			User user = registerModel.getUser();
-			
-			
-			if (user.getRole().equals("USER")) {
-				Cart cart = new Cart();
-				cart.setUser(user);
-				user.setCart(cart);
-			}
-			
-			userDAO.insert(user);
-			
-			Address billing = registerModel.getBilling();
-			billing.setUserId(user.getId());
-			billing.setBilling(true);
-			
-			userDAO.insertAddress(billing);
-			
-			return "success";
-			
+			error.addMessage(new MessageBuilder()
+					.error()
+					.source("confirmPassword")
+					.defaultText("Password does not match confirm password!")
+					.build());
+			return "error";
 		}
 		
-		public String validate(User user , MessageContext error)
-		{
-			if(!(user.getPassword().equals(user.getConfirmPassword())))
-			{
-				error.addMessage(new MessageBuilder()
-						.error()
-						.source("confirmPassword")
-						.defaultText("Password does not match confirm password!")
-						.build());
-				return "error";
-			}
-			
-			return "billing";
-			
-		}
+		return "billing";
+		
+	}
 		
 	}

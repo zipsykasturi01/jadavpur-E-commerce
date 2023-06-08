@@ -5,7 +5,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <spring:url var="images" value="/rs/images" />
-<spring:url var="css" value="/rs/css/css" />
+<spring:url var="css" value="/rs/css" />
 <spring:url var="js" value="/rs/js"/>
 
 
@@ -72,6 +72,10 @@
 				
 				<c:if test="${userclickregister == true}">
 					<%@ include file="register.jsp"%>
+				</c:if>
+					
+					<c:if test="${userclickshowcart == true}">
+					<%@ include file="Cart.jsp"%>
 				</c:if>
 				
 			</div>
