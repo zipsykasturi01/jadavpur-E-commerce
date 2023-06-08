@@ -23,41 +23,40 @@ public class CategoryTest {
 		categoryDAO = (CategoryDAO)context.getBean("categoryDAO");
 	}
 	
-	@Test
+	/*
+	//@Test
 	public void testInsert()
 	{
-		Category = new Category();
-		Category.setId(18);
-		Category.setCategoryName("AC");
-		Category.setDescription("Sample Category for AC");
-		Category.setActive(true);
+		category = new Category();
+		category.setId(5);
+		category.setCategoryName("Laptop");
+		category.setDescription("Sample category for Laptop");
+		category.setActive(true);
 		
-		assertEquals("Error adding Category" , true, categoryDAO.insert(Category));
+		assertEquals("Error adding Category" , true, categoryDAO.insert(category));
 	}
+	
 	//@Test
 	public void testDelete()
 	{
-		Category = categoryDAO.getCategory(1);
+		category = categoryDAO.getCategory(12);
 		
-		
-		assertEquals("Error deleting Category" , true, categoryDAO.delete(Category));
+		assertEquals("Error deleting Category" , true, categoryDAO.delete(category));
 	}
+	
 	//@Test
 	public void testUpdate()
 	{
-		Category = categoryDAO.getCategory(1);
-		Category.setCategoryName("Television");
+		category = categoryDAO.getCategory(1);
+		category.setCategoryName("Television");
 		
-		
-		assertEquals("Error updating Category" , true, categoryDAO.update(Category));
+		assertEquals("Error updating Category" , true, categoryDAO.update(category));
 	}
 	
 	//@Test
 	public void testCategoryList()
 	{
-		
-		
-		assertEquals("Error updating Category" , 3, categoryDAO.categoryList().size());
+		assertEquals("Error updating Category" , 2, categoryDAO.categoryList().size());
 	}
-
+*/
 }

@@ -1,5 +1,6 @@
 package com.niit.Backend.DAOIMPL;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.Backend.DAO.CategoryDAO;
 import com.niit.Backend.modal.Category;
+
 
 @Repository("categoryDAO")
 @Transactional

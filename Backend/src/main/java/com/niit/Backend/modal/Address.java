@@ -45,6 +45,7 @@ public class Address implements Serializable
 	
 	@Column(name="is_shipping")
 	private boolean shipping;
+	
 	@Column(name="is_billing")
 	private boolean billing;
 	public int getId() {
@@ -111,6 +112,7 @@ public class Address implements Serializable
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 }
 		
 		

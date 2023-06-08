@@ -7,17 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Niit_Jadavpur_CartLines")
-public class CartLines implements Serializable
-{
+@Table(name="Niit_Jadavpur_Order_Items")
+public class OrderItem implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
+	
+private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -25,62 +27,65 @@ public class CartLines implements Serializable
 	@OneToOne
 	private Product product;
 	
-	@Column(name = "cart_id")
-	private int cartId;	
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private OrderDetails orderDetail;
+
+	public OrderDetails getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(OrderDetails orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	@Column (name = "buying_price")
+	private double buyingPrice;
 	
-	@Column(name = "product_count")
+	@Column (name = "product_count")
 	private int productCount;
 	
 	private double total;
-	
-	@Column(name = "buying_price")
-	private double buyingPrice;
-	
-	public double getBuyingPrice() {
-		return buyingPrice;
-	}
-	public void setBuyingPrice(double buyingPrice) {
-		this.buyingPrice = buyingPrice;
-	}
-	
-	@Column(name = "is_available")
-	private boolean available = true;
+
 	
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public Product getProduct() {
 		return product;
 	}
+
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public int getCartId() {
-		return cartId;
+
+
+	public double getBuyingPrice() {
+		return buyingPrice;
 	}
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
+
+	public void setBuyingPrice(double buyingPrice) {
+		this.buyingPrice = buyingPrice;
 	}
 
 	public int getProductCount() {
 		return productCount;
 	}
+
 	public void setProductCount(int productCount) {
 		this.productCount = productCount;
 	}
+
 	public double getTotal() {
 		return total;
 	}
+
 	public void setTotal(double total) {
 		this.total = total;
-	}
-	public boolean isAvailable() {
-		return available;
-	}
-	public void setAvailable(boolean available) {
-		this.available = available;
 	}
 }

@@ -11,5 +11,6 @@ public interface ProductDAO {
 	 List<Product>listProduct();
 	List<Product> listActiveProducts();	
 	List<Product> listActiveProductsByCategory(int categoryId);
+	List<Product> topPurchasedProduct();
 
 }

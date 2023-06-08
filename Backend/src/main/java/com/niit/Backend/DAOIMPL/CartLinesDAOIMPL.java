@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.Backend.DAO.CartLinesDAO;
 import com.niit.Backend.modal.Cart;
 import com.niit.Backend.modal.CartLines;
+import com.niit.Backend.modal.OrderDetails;
 
 @Repository("cartLinesDAO")
 @Transactional
@@ -89,5 +90,35 @@ public class CartLinesDAOIMPL  implements CartLinesDAO {
 										.getResultList();
 	}
 	
+	@Override
+	public CartLines getByCartAndProduct(int cartId, int productId) {
+		String query = "FROM CartLines WHERE cartId = :cartId AND product.id = :productId";
+		try {
+			
+			return sessionFactory.getCurrentSession()
+									.createQuery(query,CartLines.class)
+										.setParameter("cartId", cartId)
+										.setParameter("productId", productId)
+											.getSingleResult();
+			
+		}
+		catch(Exception ex) 
+		{
+			return null;	
+		}
+		
+	}
+	
+	@Override
+	public boolean addOrderDetail(OrderDetails orderDetail) 
+	{
+		try {			
+			sessionFactory.getCurrentSession().persist(orderDetail);			
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
+	}
 }
 
